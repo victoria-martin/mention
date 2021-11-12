@@ -1,6 +1,6 @@
 ## Available Scripts
 
-To start de projet, you need to run
+To start the projet, you need to run
 
 ### `npm install`
 
@@ -8,7 +8,7 @@ to install all necessary packages
 
 ### `cors-backdoor --target https://web.mention.com`
 
-in order to start the proxy server to overpass CORS issues
+to start the proxy server to overpass CORS issues
 
 ### `npm start`
 
