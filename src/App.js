@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useCallback } from "react"
+import React, { useEffect, useState } from "react"
 import Mention from "./components/Mention"
 import Loader from "react-js-loader"
 import { api } from "./helpers/api"
+import PropTypes from "prop-types"
 
 const ContainerMentions = ({ mentions }) => {
   return (
@@ -21,14 +22,18 @@ const ContainerMentions = ({ mentions }) => {
   )
 }
 
+ContainerMentions.propTypes = {
+  mentions: PropTypes.array,
+}
+
 const ContainerLoader = () => {
   return (
     <div className="loader">
       <Loader bgColor="grey" size="100" />
-      {/* </div> */}
     </div>
   )
 }
+
 const ContainerError = () => {
   return (
     <span className="error_message">
@@ -36,29 +41,29 @@ const ContainerError = () => {
     </span>
   )
 }
+
 const App = () => {
   const [mentions, setMentions] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
-  const getMentionsAsync = useCallback(async () => {
+  const getMentionsAsync = async () => {
     setLoading(true)
     setError(false)
     try {
       const res = await api.get("/mentions")
-      console.log(res.data.mentions)
       setMentions(res.data.mentions)
       setLoading(false)
-      return res.data
     } catch (err) {
-      console.log("Error : " + err.response.statusText)
+      err.response
+        ? console.log("Error : " + err.response.statusText)
+        : console.log("Nous ne pouvons récupérer les données")
       setError(true)
     }
-  })
+  }
 
   useEffect(() => {
     getMentionsAsync()
-
     return () => {
       setMentions([])
       setLoading(true)
@@ -74,10 +79,8 @@ const App = () => {
         ) : !loading && mentions.length ? (
           <ContainerMentions mentions={mentions} />
         ) : (
-          // <div className="container_loader">
           <ContainerLoader />
         )}
-        {/* refresh button */}
         <div className="container_bottom">
           <button onClick={() => getMentionsAsync()}>Refresh</button>
         </div>

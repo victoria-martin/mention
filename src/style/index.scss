@@ -15,15 +15,11 @@ code {
 }
 
 .App {
-  /* text-align: center; */
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  /* display: grid;
-  grid-template-columns: 1fr 700px 1fr;
-  grid-template-rows: 1fr 800px 1fr; */
 }
 
 .container {
@@ -31,15 +27,10 @@ code {
   height: 63%;
   min-width: 250px;
   max-width: 425px;
-  // justify-content: center;
-  /* min-width: ; */
   box-sizing: border-box;
   display: grid;
   grid-template-rows: 1fr auto;
 
-  // .error-message {
-
-  // }
   .error_message {
     max-width: 72%;
     text-align: center;
@@ -119,9 +110,6 @@ code {
       margin: 4px 0;
     }
     .date {
-      // position: absolute;
-      // right: 5px;
-      // top: 5px;
       margin-left: auto;
       color: $blue;
     }
@@ -132,8 +120,6 @@ code {
     }
     .title {
       font-weight: bolder;
-    }
-    .description {
     }
   }
   &:hover {
