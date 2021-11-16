@@ -69,7 +69,7 @@ code {
 .container_mentions {
   flex-direction: column;
   display: flex;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .mention {
@@ -77,26 +77,53 @@ code {
   border-bottom: solid 1px $light-grey;
   width: 100%;
   display: grid;
-  grid-template-columns: 70px minmax(140px, 1fr);
-  // grid-template-columns: 70px 140px;
+  grid-template-columns: 75px minmax(140px, 1fr);
+
   grid-template-rows: 1fr;
   padding: 16px 12px 16px 0;
   box-sizing: border-box;
 
-  .icon_container {
+  .img_container {
     display: flex;
-    justify-content: center;
+
     align-items: center;
+    flex-direction: column;
+
+    .icon_container {
+      position: relative;
+      margin-bottom: 20px;
+    }
 
     .icon {
       border-radius: 100px;
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       border: solid 1px $light-grey;
     }
 
     .icon_empty {
       background-color: $light-grey;
+    }
+    .source_type {
+      border: solid 2px white;
+      border-radius: 100px;
+      position: absolute;
+      height: 18px;
+      width: 18px;
+      bottom: -10px;
+      right: -10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      padding: 2px;
+    }
+
+    .marker_read {
+      height: 10px;
+      width: 10px;
+      border-radius: 100px;
+      background-color: $blue;
     }
   }
 
@@ -120,6 +147,9 @@ code {
     }
     .title {
       font-weight: bolder;
+    }
+    .description {
+      min-height: 36px;
     }
   }
   &:hover {

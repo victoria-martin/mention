@@ -11,11 +11,12 @@ const ContainerMentions = ({ mentions }) => {
         <Mention
           title={mention.title}
           description={mention.description_short}
-          source={mention.source_url}
           clickable_url={mention.clickable_url}
           date={mention.created_at}
           key={mention.id}
           img_url={mention.picture_url}
+          source_name={mention.source_name}
+          source_type={mention.source_type}
         />
       ))}
     </div>
