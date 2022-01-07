@@ -23,3 +23,16 @@ export const SOURCETYPE = [
     icon: <MdForum size={SIZE} />,
   },
 ]
+
+// faut-il remettre la key dans l obj ?
+export const SOURCETYPEMAP = [
+  ["twitter", { icon: <FaTwitter size={SIZE} />, bgcolor: color.source_blue }],
+  ["blogs", { icon: <ImBlog size={SIZE} />, bgcolor: color.source_dark }],
+  ["forums", { icon: <MdForum size={SIZE} />, bgcolor: color.source_green }],
+]
+
+// export const SOURCETYPEMAP = [
+//   ["twitter", "twitterIcon"],
+//   ["blogs", "blogsIcon"],
+//   ["forums", "forumsIcon"],
+// ]
