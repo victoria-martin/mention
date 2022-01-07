@@ -47,6 +47,11 @@ const App = () => {
   const [mentions, setMentions] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
+  // const [mentionsMap, setMentionsMap] = useState(new Map())
+
+  // const updateMap = (k, v) => {
+  //   setMentionsMap(mentionsMap.set(k, v))
+  // }
 
   const getMentionsAsync = async () => {
     setLoading(true)
@@ -55,7 +60,9 @@ const App = () => {
       const res = await api.get("/mentions")
       setMentions(res.data.mentions)
       setLoading(false)
+      console.log(res)
     } catch (err) {
+      console.log(Error(err))
       err.response
         ? console.log("Error : " + err.response.statusText)
         : console.log("Nous ne pouvons récupérer les données")

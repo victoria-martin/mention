@@ -1,10 +1,10 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import { format } from "date-fns"
 import { Img } from "react-image"
 import PropTypes from "prop-types"
 import { useEffect } from "react/cjs/react.development"
-import { SOURCETYPE } from "../constants/source_type"
-import Mark from "mark.js"
+import { SOURCETYPE, SOURCETYPEMAP } from "../constants/source_type"
+const reactStringReplace = require("react-string-replace")
 
 const EmptyIcon = () => {
   return <div className="icon icon_empty" />
@@ -12,18 +12,32 @@ const EmptyIcon = () => {
 
 const SourceIcon = ({ source_type }) => {
   const [sourceTypeData, setSourcetypeData] = useState({})
+  const [icon, setIcon] = useState("")
+  const [bgcolor, setBgcolor] = useState(null)
+  const myMap = new Map(SOURCETYPEMAP)
 
-  useEffect(
-    () => setSourcetypeData(SOURCETYPE.find((e) => e.type === source_type)),
-    [source_type]
-  )
+  // v1 with [SOURCETYPE]
+  // useEffect(
+  //   () => setSourcetypeData(SOURCETYPE.find((e) => e.type === source_type)),
+  //   [source_type]
+  // )
+  // myMap.set()
+
+  useEffect(() => {
+    console.log(myMap)
+    setIcon(myMap.get(source_type)["icon"])
+    return () => {
+      setBgcolor(null)
+      setIcon(null)
+    }
+  }, [myMap, source_type])
 
   return (
     <div
-      style={{ backgroundColor: sourceTypeData.bgcolor }}
+      style={{ backgroundColor: myMap.get(source_type)["bgcolor"] }}
       className="source_type"
     >
-      {sourceTypeData.icon}
+      {icon}
     </div>
   )
 }
@@ -38,19 +52,12 @@ const Mention = ({
   source_type,
 }) => {
   const [read, setRead] = useState(false)
-
   const openLink = () => window.open(clickable_url, "_blank")
 
   const handleRead = () => (!read ? setRead(true) : null)
+  const ref = useRef()
 
-  const highlight = () => {
-    const highlightedText = "mention"
-    const context = document.querySelector(".context")
-    const instance = new Mark(context)
-    instance.mark(highlightedText)
-  }
-
-  useEffect(() => highlight(), [description])
+  const highlightedText = "mention"
 
   return (
     <div
@@ -80,7 +87,14 @@ const Mention = ({
           <span className="date">{format(new Date(date), "do LLL")}</span>
         </div>
         <span className="title hide">{title}</span>
-        <span className="description context">{description}</span>
+        <span className="description">
+          {reactStringReplace(description, /(mention)/gi, () => (
+            <mark>
+              <b>mention</b>
+            </mark>
+          ))}
+          {/* {description} */}
+        </span>
       </div>
     </div>
   )

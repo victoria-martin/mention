@@ -62,6 +62,12 @@ code {
       transition: background 250ms ease-in-out, transform 150ms ease;
       -webkit-appearance: none;
       -moz-appearance: none;
+      &:hover {
+        $brightness: 90%;
+        filter: brightness($brightness);
+        -webkit-filter: brightness($brightness);
+        transition: all 0.2s ease-in;
+      }
     }
   }
 }

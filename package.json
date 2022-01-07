@@ -16,6 +16,7 @@
     "react-image": "^4.0.3",
     "react-js-loader": "^0.1.0",
     "react-scripts": "4.0.3",
+    "react-string-replace": "^0.4.4",
     "sass": "^1.43.4",
     "web-vitals": "^1.1.2"
   },
