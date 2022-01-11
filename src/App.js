@@ -7,7 +7,7 @@ import PropTypes from "prop-types"
 const ContainerMentions = ({ mentions }) => {
   return (
     <div className="container_mentions">
-      {mentions.map((mention) => (
+      {mentions.map((mention, i) => (
         <Mention
           title={mention.title}
           description={mention.description_short}
@@ -17,6 +17,7 @@ const ContainerMentions = ({ mentions }) => {
           img_url={mention.picture_url}
           source_name={mention.source_name}
           source_type={mention.source_type}
+          i={i}
         />
       ))}
     </div>

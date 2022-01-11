@@ -4,6 +4,7 @@ import { Img } from "react-image"
 import PropTypes from "prop-types"
 import { useEffect } from "react/cjs/react.development"
 import { SOURCETYPE, SOURCETYPEMAP } from "../constants/source_type"
+import Description from "./Description"
 const reactStringReplace = require("react-string-replace")
 
 const EmptyIcon = () => {
@@ -24,7 +25,7 @@ const SourceIcon = ({ source_type }) => {
   // myMap.set()
 
   useEffect(() => {
-    console.log(myMap)
+    // console.log(myMap)
     setIcon(myMap.get(source_type)["icon"])
     return () => {
       setBgcolor(null)
@@ -50,6 +51,7 @@ const Mention = ({
   clickable_url,
   source_name,
   source_type,
+  i,
 }) => {
   const [read, setRead] = useState(false)
   const openLink = () => window.open(clickable_url, "_blank")
@@ -87,13 +89,13 @@ const Mention = ({
           <span className="date">{format(new Date(date), "do LLL")}</span>
         </div>
         <span className="title hide">{title}</span>
-        <span className="description">
-          {reactStringReplace(description, /(mention)/gi, () => (
+        <span className="description" style={{ border: "solid 2px red" }}>
+          {/* {reactStringReplace(description, /(mention)/gi, () => (
             <mark>
               <b>mention</b>
             </mark>
-          ))}
-          {/* {description} */}
+          ))} */}
+          <Description description={description} index={i} />
         </span>
       </div>
     </div>
