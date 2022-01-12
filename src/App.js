@@ -61,7 +61,7 @@ const App = () => {
       const res = await api.get("/mentions")
       setMentions(res.data.mentions)
       setLoading(false)
-      console.log(res)
+      // console.log(res)
     } catch (err) {
       console.log(Error(err))
       err.response

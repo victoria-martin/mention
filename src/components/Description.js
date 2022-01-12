@@ -6,24 +6,18 @@ const Description = ({ description, index }) => {
   const [bgColor, setBgColor] = useState("transparent")
   const [finalDescArr, setFinalDescArr] = useState([])
 
-  const highlight = (text) => {}
   let breakpointIndexes = []
   let cleanArray = []
-
   const analyseDesc = (description, query, index) => {
-    let newText = description.split(" ")
+    let textArr = description.split(" ")
     let textWithoutSpecChars = []
-    // console.log(newText)
-    for (let i = 0; i < newText.length; i++) {
-      textWithoutSpecChars.push(newText[i].replace(/[^\w\s]/gi, ""))
+    for (let i = 0; i < textArr.length; i++) {
+      textWithoutSpecChars.push(textArr[i].replace(/[^\w\s]/gi, ""))
     }
-    console.log(textWithoutSpecChars)
+
+    // puts all values in LowerCase
 
     for (let i = 0; i < textWithoutSpecChars.length; i++) {
-      // console.log(index)
-      // console.log(textWithoutSpecChars[i])
-      // console.log("i")
-      // console.log(i)
       textWithoutSpecChars[i] = textWithoutSpecChars[i].toLowerCase()
       // if (textWithoutSpecChars[i] === query) {
       //   console.log("i")
@@ -42,67 +36,70 @@ const Description = ({ description, index }) => {
         // console.log(e)
         // console.log(i)
         // console.log("ici")
+
+        // attention les breakointIndexes doivent prendre en coilmptes les index sans le remove de characters
         breakpointIndexes.push(i)
       }
     })
-    // console.log(cleanArray)
-
-    // console.log(description)
-    // return description
   }
 
   useEffect(() => {
     analyseDesc(description, query, index)
+    // return () => {
+    //   setFinalDescArr([])
+    // }
   }, [])
 
   useEffect(() => {
-    console.log("cleanArray")
-    console.log(cleanArray)
-  }, [cleanArray])
-
-  useEffect(() => {
-    console.log("breakpointIndexes")
-    console.log(breakpointIndexes)
-  }, [breakpointIndexes])
-
-  useEffect(() => {
-    console.log("index de la mention")
-    console.log(index)
-  }, [index])
-
-  const displayDesc = (cleanArray, breakpointIndexes) => {}
-
-  useEffect(() => {
-    if (cleanArray.length) {
+    if (cleanArray.length)
       cleanArray.map((e, i) => {
         breakpointIndexes.map((bkptindex) => {
           bkptindex === i
-            ? finalDescArr.push({ value: e, color: "yellow" })
-            : finalDescArr.push({ value: e, color: "transparent" })
+            ? setFinalDescArr((finalDescArr) => [
+                ...finalDescArr,
+                { value: e, color: "yellow" },
+              ])
+            : setFinalDescArr((finalDescArr) => [
+                ...finalDescArr,
+                { value: e, color: "transparent" },
+              ])
         })
       })
-    }
 
     return () => setFinalDescArr([])
-  }, [cleanArray])
+  }, [])
 
-  useEffect(() => {
-    console.log("finalDescArr")
-    console.log(finalDescArr)
-  }, [finalDescArr])
+  // useEffect(() => {
+  //   console.log("cleanArray")
+  //   console.log(cleanArray)
+  // }, [cleanArray])
 
-  // <div>{index === 8 ? analyseDesc(description, query, index) : null}</div>
+  // useEffect(() => {
+  //   console.log("breakpointIndexes")
+  //   console.log(breakpointIndexes)
+  // }, [breakpointIndexes])
+
+  // useEffect(() => {
+  //   console.log("index de la mention")
+  //   console.log(index)
+  // }, [index])
+
+  // useEffect(() => {
+  //   console.log("finalDescArr")
+  //   console.log(finalDescArr)
+  //   console.log(finalDescArr.length)
+  // }, [finalDescArr])
 
   return finalDescArr.length ? (
     finalDescArr.map((e) => (
-      <span style={{ bgColor: e.color }}>
+      <span style={{ backgroundColor: e.color }}>
         {/* <span style={{ bgColor: displayDesc(cleanArray, breakpointIndexes) }}> */}
         {e.value}
         {/* </span> */}{" "}
       </span>
     ))
   ) : (
-    <div>null</div>
+    <div>{description}</div>
   )
 }
 

@@ -89,7 +89,7 @@ const Mention = ({
           <span className="date">{format(new Date(date), "do LLL")}</span>
         </div>
         <span className="title hide">{title}</span>
-        <span className="description" style={{ border: "solid 2px red" }}>
+        <span className="description">
           {/* {reactStringReplace(description, /(mention)/gi, () => (
             <mark>
               <b>mention</b>
